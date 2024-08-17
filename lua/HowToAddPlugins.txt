@@ -1,0 +1,4 @@
+Create lua file for plugin, return it as a lua table "return{}"
+Add lazy plugin
+Create config settings by creating a config function "config = function(){}"
+Write, Reload NeoVim, Fix Errors, Repeat 1-3 if necesscary.
