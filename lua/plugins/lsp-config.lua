@@ -9,7 +9,7 @@ return {
 		'williamboman/mason-lspconfig.nvim',
 		config = function()
 			require('mason-lspconfig').setup({
-				ensure_installed = {'lua_ls','omnisharp','dockerls','gopls','tsserver','ltex','pylsp','yamlls','jdtls' }
+				ensure_installed = {'lua_ls','omnisharp','dockerls','gopls','ts_ls','ltex','pylsp','yamlls','jdtls' }
 			})
 		end
 	},
@@ -19,11 +19,18 @@ return {
 			local capabilities = require('cmp_nvim_lsp').default_capabilities()
 			local lspconfig = require('lspconfig')
 			lspconfig.lua_ls.setup({
-				capabilities = capabilities
-			})
-			lspconfig.omnisharp.setup({
 				capabilities = capabilities})
-			lspconfig.tsserver.setup({
+			lspconfig.omnisharp.setup ({
+        capabilities = capabilities,
+        cmd = { "dotnet", vim.fn.stdpath "data" .. "/mason/packages/omnisharp/libexec/OmniSharp.dll" },
+        enable_import_completion = true,
+        organize_imports_on_format = true,
+        enable_roslyn_analyzers = true,
+        root_dir = function ()
+					return vim.loop.cwd() -- current working directory
+                end,
+            })
+			lspconfig.ts_ls.setup({
 				capabilities = capabilities})
 			lspconfig.pylsp.setup({
 				capabilities = capabilities})
