@@ -11,7 +11,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
+vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+
 local opts = {}
+
 
 require("vim-options")
 require("lazy").setup("plugins")
