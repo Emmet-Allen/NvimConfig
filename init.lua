@@ -11,7 +11,10 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
 end
 vim.opt.rtp:prepend(lazypath)
 
-vim.keymap.set('i', 'jk', '<Esc>', { noremap = true, silent = true })
+local keymap = vim.keymap.set
+
+keymap('i', 'jk', '<Esc>', { noremap = true, silent = true })
+vim.api.nvim_set_keymap('n', 't', ':lua NTGlobal["terminal"]:toggle() <CR>', {noremap = true, silent = true})
 
 local opts = {}
 
